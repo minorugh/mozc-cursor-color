@@ -79,5 +79,6 @@
 (mozc-cursor-color-setup)
 
 
+(provide 'mozc-cursor-color)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; mozc-cursor-color.el ends here
