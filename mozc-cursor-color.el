@@ -10,6 +10,7 @@
 (defvar mozc-cursor-color-conflicts-list
   '(ac-completing))
 
+;; Like doom-dracura-theme color
 (defvar mozc-cursor-color-alist
   '((direct . "#50fa7b")
     (read-only . "#f8f8f2")
