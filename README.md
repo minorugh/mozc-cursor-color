@@ -1,0 +1,2 @@
+# mozc-cursor-color
+
