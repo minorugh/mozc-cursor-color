@@ -1,4 +1,4 @@
-;;; mozc-cursor-color.el --- Set cursor color for mozc -*- lexical-binding: t; no-byte-compile:t -*-
+;;; mozc-cursor-color.el --- Set cursor color for mozc.
 ;;; Commentary:
 ;;
 ;; Copyright (C) 2013 S. Irie from iTi-E/mozc-el-extensions
