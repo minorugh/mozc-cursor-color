@@ -62,9 +62,9 @@
   '(ac-completing))
 
 (defvar mozc-cursor-color-alist
-  '((direct . "#50fa7b");; (direct . "blue")
+  '((direct . "#50fa7b");; original setting is "blue"
     (read-only . "lime green")
-    (hiragana . "#ff5555");; (hiragana . "red")
+    (hiragana . "#ff5555");; original setting is "red"
     (full-katakana . "goldenrod")
     (half-ascii . "dark orchid")
     (full-ascii . "orchid")
