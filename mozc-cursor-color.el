@@ -5,6 +5,8 @@
 ;; Author: S. Irie, October 2013
 ;; Keywords: mule, multilingual, input method
 
+;; Modify: M. Yamada, April 2025
+
 ;; Everyone is permitted to copy and distribute verbatim or modified
 ;; copies of this license document, and changing it is allowed as long
 ;; as the name is changed.
