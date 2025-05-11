@@ -117,7 +117,6 @@
      (remove-hook 'post-command-hook 'mozc-cursor-color-update)
      (message "mozc-cursor-color was disabled due to the error.  See \"*Messages*\" buffer."))))
 
-;;;###autoload
 (defun mozc-cursor-color-setup ()
   (interactive)
   (mozc-cursor-color-setup-timer)
