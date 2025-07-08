@@ -1,4 +1,7 @@
-;; mozc-cursor-color.el --- Set cursor color corresponding to mozc's input state
+;;; mozc-cursor-color.el --- Set cursor color corresponding to mozc's input state  -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
+;; (setq debug-on-error t)
 
 ;; Copyright (C) 2013 S. Irie
 
