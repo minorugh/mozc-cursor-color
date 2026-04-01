@@ -1,8 +1,10 @@
-;; mozc-cursor-color.el --- Set cursor color corresponding to mozc's input state
+;;; mozc-cursor-color.el --- Set cursor color corresponding to mozc's input state -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2013 S. Irie
 
 ;; Author: S. Irie, October 2013
+;; Version: 0.1.2
+;; Package-Requires: ((emacs "24.1") (mozc "0.0.0"))
 ;; Keywords: mule, multilingual, input method
 
 ;; Everyone is permitted to copy and distribute verbatim or modified
