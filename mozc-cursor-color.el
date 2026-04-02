@@ -67,7 +67,7 @@
 (defvar mozc-cursor-color-alist
   '((direct . "lime green")
     (read-only . "lime green")
-    (hiragana . "red")
+    (hiragana . "#cc3333")
     (full-katakana . "goldenrod")
     (half-ascii . "dark orchid")
     (full-ascii . "orchid")
