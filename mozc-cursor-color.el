@@ -3,7 +3,7 @@
 ;; Copyright (C) 2013 S. Irie
 
 ;; Author: S. Irie, October 2013
-;; Version: 0.1.2
+;; Version: 0.1.3
 ;; Package-Requires: ((emacs "24.1") (mozc "0.0.0"))
 ;; Keywords: mule, multilingual, input method
 
@@ -25,7 +25,7 @@
 ;;
 ;; First, ensure you already can use mozc-mode.
 ;;
-;; Save this file in a directory listed in load-parh, and put the
+;; Save this file in a directory listed in load-path, and put the
 ;; following code in your .emacs file.
 ;;
 ;; (require 'mozc-cursor-color)
@@ -35,8 +35,11 @@
 ;;
 ;; Tested on Emacs 24.
 
-
 ;; History:
+;; 2026-04-02  Minoru Yamada
+;;         * Replace defadvice with advice-add (modern Emacs compatibility)
+;;         * Version 0.1.3
+;;
 ;; 2013-11-05  S. Irie
 ;;         * Fix `mozc-current-input-mode' not buffer-local
 ;;         * Fix error handler not working properly
@@ -52,11 +55,11 @@
 ;;         * Version 0.1.0
 
 
-;;; Code
+;;; Code:
 
 (require 'mozc)
 
-(defvar mozc-cursor-color-version "0.1.2")
+(defvar mozc-cursor-color-version "0.1.3")
 
 (defvar mozc-cursor-color-conflicts-list
   '(ac-completing))
@@ -75,41 +78,42 @@
 (defvar mozc-current-input-mode 'hiragana)
 (make-variable-buffer-local 'mozc-current-input-mode)
 
-(defadvice mozc-session-execute-command (after mozc-current-input-mode () activate)
-  (if ad-return-value
-      (let ((mode (mozc-protobuf-get ad-return-value 'mode)))
-	(if mode
-	    (setq mozc-current-input-mode mode)))))
+(advice-add 'mozc-session-execute-command :after
+            (lambda (return-value &rest _)
+              (when return-value
+                (let ((mode (mozc-protobuf-get return-value 'mode)))
+                  (when mode
+                    (setq mozc-current-input-mode mode))))))
 
 (defvar mozc-cursor-color-timer nil)
 
 (defun mozc-cursor-color-setup-timer (&optional cancel)
-  (if (timerp mozc-cursor-color-timer)
-	(cancel-timer mozc-cursor-color-timer))
+  (when (timerp mozc-cursor-color-timer)
+    (cancel-timer mozc-cursor-color-timer))
   (setq mozc-cursor-color-timer
-	(and (not cancel)
-	     (run-with-idle-timer mozc-cursor-color-timer-delay t
-				  'mozc-cursor-color-update))))
+        (and (not cancel)
+             (run-with-idle-timer mozc-cursor-color-timer-delay t
+                                  'mozc-cursor-color-update))))
 
 (defun mozc-cursor-color-update ()
   (condition-case err
       (catch 'exit
-	(mapc (lambda (symbol)
-		(if (and (boundp symbol)
-			 (symbol-value symbol))
-		    (throw 'exit nil)))
-	      mozc-cursor-color-conflicts-list)
-	(set-cursor-color
-	 (or (cdr (assq (cond
-			 ((and buffer-read-only
-			       (not inhibit-read-only))
-			  'read-only)
-			 ((not mozc-mode)
-			  'direct)
-			 (t
-			  mozc-current-input-mode))
-			mozc-cursor-color-alist))
-	     (frame-parameter nil 'foreground-color))))
+        (mapc (lambda (symbol)
+                (when (and (boundp symbol)
+                           (symbol-value symbol))
+                  (throw 'exit nil)))
+              mozc-cursor-color-conflicts-list)
+        (set-cursor-color
+         (or (cdr (assq (cond
+                         ((and buffer-read-only
+                               (not inhibit-read-only))
+                          'read-only)
+                         ((not mozc-mode)
+                          'direct)
+                         (t
+                          mozc-current-input-mode))
+                        mozc-cursor-color-alist))
+             (frame-parameter nil 'foreground-color))))
     (error
      (message "error in mozc-cursor-color-update(): %S" err)
      (set-cursor-color (frame-parameter nil 'foreground-color))
@@ -125,7 +129,6 @@
 
 (mozc-cursor-color-setup)
 
-
 (provide 'mozc-cursor-color)
 
-;;; mozc-cursor-color.el ends Here
+;;; mozc-cursor-color.el ends here
