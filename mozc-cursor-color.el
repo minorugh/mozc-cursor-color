@@ -65,7 +65,7 @@
   '(ac-completing))
 
 (defvar mozc-cursor-color-alist
-  '((direct . "blue")
+  '((direct . "lime green")
     (read-only . "lime green")
     (hiragana . "red")
     (full-katakana . "goldenrod")
