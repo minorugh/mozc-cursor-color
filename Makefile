@@ -5,3 +5,7 @@ git:
 	git add -A && \
 	git diff --cached --quiet || git commit -m "auto: $$DATE"; \
 	git push || true
+
+# Local Variables:
+# buffer-read-only: t
+# End:
